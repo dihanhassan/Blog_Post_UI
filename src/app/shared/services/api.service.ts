@@ -1,0 +1,54 @@
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { UserLoginRequest, UserLoginResponse } from '../api-models';
+import { error } from "console";
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+
+  private apiUrl = '';
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiBaseUrl;
+  }
+ 
+  handleError(error: HttpErrorResponse) {
+    return of(null);
+  }
+  private getData(url : string) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/${url}`).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    );
+  }
+  private postData(url : string , data : any) : Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(`${this.apiUrl}/${url}`,data,{headers})
+  }
+
+  private deleteData(url : string) : Observable<any>{
+    return this.http.delete<any>(`${this.apiUrl}/${url}`).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    );
+  }
+
+  userLogin(email: string , password: string) : Observable<UserLoginResponse | null> {
+    const req = {email, password};
+    return this.postData('api/user-management/login', req).pipe(
+        map(x=>x.data),
+        catchError(this.handleError)
+    );
+  }
+  getAccessToken(refreshToken: string) : Observable<UserLoginResponse | null> {
+    const req = {refreshToken};
+    return this.postData(`api/user-management/refresh-token`,req).pipe(
+      map(x=>x.data),
+      catchError(this.handleError)
+    );
+  }
+
+}

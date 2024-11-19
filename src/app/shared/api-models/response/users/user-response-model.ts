@@ -8,3 +8,4 @@ export interface UserLoginResponse extends token{
     lastName: string;
     email: string;
 }
+export interface UserRegisterResponse extends UserLoginResponse{}
