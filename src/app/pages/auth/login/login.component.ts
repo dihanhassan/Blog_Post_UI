@@ -71,6 +71,9 @@ export class LoginComponent implements OnInit {
 
     this.resolveNaviage();
   }
+  async signUp(){
+    this.router.navigate(['/registration']);
+  }
   resolveNaviage(){
     this.store.select(UserAuthenticateState.isLogedIn).pipe(take(1)).subscribe((loggedIn: boolean) => {
       if (loggedIn) {
