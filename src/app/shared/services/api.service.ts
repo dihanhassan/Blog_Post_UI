@@ -5,6 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CategoryResponse, UserLoginRequest, UserLoginResponse } from '../api-models';
 import { error } from "console";
+import { PostsResponse } from "../api-models/response/post/post-response.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -53,6 +54,12 @@ export class ApiService {
 
   getAllCategories() : Observable<CategoryResponse[] | null>{
     return this.getData('api/category-management/category').pipe(
+      map(x=>x.data),
+      catchError(this.handleError)
+    );
+  }
+  getAllPosts() : Observable<PostsResponse[] | null>{
+    return this.getData('api/post-management/get-all-posts').pipe(
       map(x=>x.data),
       catchError(this.handleError)
     );
