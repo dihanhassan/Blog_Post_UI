@@ -15,12 +15,13 @@ import { UserAuthenticateState } from '../../store/user-authentication/user-auth
 import { userAuthenticateAction } from '../../store/user-authentication/user-authentication.action';
 import { ApiService } from '../services/api.service';
 import { Token } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private refreshTokenInProgress: Observable<any> | null = null;
-  constructor(private store: Store, private router: Router,private apiService : ApiService) {}
+  constructor(private store: Store, private router: Router,private apiService : ApiService,private toastr: ToastrService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.store.select(UserAuthenticateState.getToken).pipe(
@@ -33,6 +34,16 @@ export class JwtInterceptor implements HttpInterceptor {
           catchError((error: HttpErrorResponse) => {
             if(error.status === 401){
               return this.handle401Error(req, next);
+            }
+            
+            if (error.status === 403) {
+              this.toastr.warning('Access Denied! You do not have permission.', 'Forbidden');
+            }
+            if (req.url.includes('api/user-management/login')) {
+              this.toastr.error('Invalid email or password.', 'Login Failed');
+            }
+            else {
+              this.toastr.error('An unexpected error occurred.', 'Error');
             }
             return throwError(error);
           })
@@ -64,6 +75,7 @@ export class JwtInterceptor implements HttpInterceptor {
             return next.handle(request);
           }),
           catchError(err => {
+            
             this.store.dispatch(new userAuthenticateAction.ClearResult());
             this.router.navigate(['/login']);
             return throwError(err);

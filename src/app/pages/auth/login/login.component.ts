@@ -9,7 +9,7 @@ import { Store } from '@ngxs/store';
 import { userAuthenticateAction } from '../../../store/user-authentication/user-authentication.action';
 import { UserAuthenticateState } from '../../../store/user-authentication/user-authentication.state';
 import { take } from 'rxjs';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private store: Store,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +78,7 @@ export class LoginComponent implements OnInit {
   resolveNaviage(){
     this.store.select(UserAuthenticateState.isLogedIn).pipe(take(1)).subscribe((loggedIn: boolean) => {
       if (loggedIn) {
+        this.toastr.success('Login Successfull');
         this.router.navigate(['/home']);
       }
       else {
