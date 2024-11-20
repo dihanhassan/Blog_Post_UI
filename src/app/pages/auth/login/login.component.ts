@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
     this.store.select(UserAuthenticateState.isLogedIn).pipe(take(1)).subscribe((loggedIn: boolean) => {
       if (loggedIn) {
         this.toastr.success('Login Successfull');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/content']);
       }
       else {
         

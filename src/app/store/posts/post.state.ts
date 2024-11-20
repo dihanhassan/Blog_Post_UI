@@ -7,12 +7,14 @@ import { PostsResponse } from "../../shared/api-models/response/post/post-respon
 
 export interface PostStateModel {
     posts: PostsResponse[];
+    post : PostsResponse;
 }
 
 @State<PostStateModel>({
   name : 'post',
   defaults : {
-    posts: []
+    posts: [],
+    post : {} as PostsResponse
   }
 })
 @Injectable()
@@ -21,6 +23,11 @@ export class PostState {
   @Selector()
   static getAllPosts(state : PostStateModel) : PostsResponse[] {
     return state.posts ;
+  }
+
+  @Selector()
+  static getPostById(state : PostStateModel) : PostsResponse {
+    return state.post;
   }
 
   @Action(postAction.GetAllPosts)
@@ -37,4 +44,23 @@ export class PostState {
       })
     );
   }
+  @Action(postAction.GetPostById)
+  getPostById(ctx: StateContext<PostStateModel>, action: postAction.GetPostById) {
+    const state = ctx.getState();
+    
+    const post = state.posts.find(p => p.id === action.id);
+    if (post) {
+      ctx.setState({
+        ...state,
+        post: post,
+      });
+    } 
+    else {
+      ctx.setState({
+        ...state,
+        post: {} as PostsResponse, 
+      });
+    }
+  }
+
 }
