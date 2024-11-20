@@ -1,0 +1,12 @@
+<section class="w-80 bg-gray-800 p-4 h-screen overflow-y-auto">
+  <div class="flex flex-col space-y-4">
+    
+    <div *ngFor="let category of categories" class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all w-full">
+      <a class="flex items-center text-white hover:text-gray-300">
+        <!-- Optional Category Icon -->
+        <i class="fas fa-tags mr-2"></i>
+        <span class="truncate text-xs">{{ category.name }}</span> <!-- Smaller text size -->
+      </a>
+    </div>
+  </div>
+</section>

@@ -42,9 +42,7 @@ export class JwtInterceptor implements HttpInterceptor {
             if (req.url.includes('api/user-management/login')) {
               this.toastr.error('Invalid email or password.', 'Login Failed');
             }
-            else {
-              this.toastr.error('An unexpected error occurred.', 'Error');
-            }
+            
             return throwError(error);
           })
         );

@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { UserLoginRequest, UserLoginResponse } from '../api-models';
+import { CategoryResponse, UserLoginRequest, UserLoginResponse } from '../api-models';
 import { error } from "console";
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,13 @@ export class ApiService {
   getAccessToken(refreshToken: string) : Observable<UserLoginResponse | null> {
     const req = {refreshToken};
     return this.postData(`api/user-management/refresh-token`,req).pipe(
+      map(x=>x.data),
+      catchError(this.handleError)
+    );
+  }
+
+  getAllCategories() : Observable<CategoryResponse[] | null>{
+    return this.getData('api/category-management/category').pipe(
       map(x=>x.data),
       catchError(this.handleError)
     );

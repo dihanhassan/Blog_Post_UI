@@ -1,0 +1,21 @@
+<section class="shadow-2xl p-5 flex flex-row bg-gray-600 overflow-hidden" style="height: calc(100vh - 60px); max-height: calc(100vh - 60px); overflow-y: auto;">
+  <div class="p-8 bg-gray-600">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a *ngFor="let post of blogPosts" [routerLink]="['/post', 2]" class="bg-gray-800 p-6 rounded-lg hover:shadow-lg transition-all hover:bg-gray-700">
+        <div>
+          <h2 class="text-xl font-bold mb-2 text-slate-200">{{ post.title }}</h2>
+          <p class="flex items-center mb-4 text-slate-200">
+            <i class="fas fa-feather-alt mr-2 text-slate-200"></i> {{ post.author }}
+          </p>
+          <p class="mb-4 text-slate-200 text-sm">
+            {{ post.content }}
+          </p>
+          <p class="text-slate-200 text-sm">
+            <i class="far fa-calendar-alt mr-2"></i> {{ post.date }} 
+            <i class="far fa-clock ml-4 mr-2"></i> {{ post.readTime }}
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
