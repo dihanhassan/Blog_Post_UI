@@ -1,5 +1,7 @@
-<section class="shadow-2xl p-5 flex flex-row bg-gray-600 overflow-hidden" style="height: calc(100vh - 60px); max-height: calc(100vh - 60px);">
-  <div class="p-8 bg-gray-600">
+<section 
+  class="shadow-2xl p-5 flex flex-row bg-gray-600 overflow-hidden" 
+  style="height: calc(100vh - 60px); max-height: calc(100vh - 60px);">
+  <div class="p-8 bg-gray-600 w-full">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <a *ngFor="let post of blogPosts" [routerLink]="['/content/view-post', post.id]" class="bg-gray-800 p-6 rounded-lg hover:shadow-lg transition-all hover:bg-gray-700">
         <div>

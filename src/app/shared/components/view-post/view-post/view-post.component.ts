@@ -6,6 +6,7 @@ import { postAction } from '../../../../store/posts/post.action';
 import { PostState } from '../../../../store/posts/post.state';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import { HelperUtils } from '../../../utils/helper.utils';
 
 @Component({
   selector: 'app-view-post',
@@ -39,4 +40,9 @@ export class ViewPostComponent implements OnInit {
       });
     });
   }
+
+  convertToBanglaDate(englishDate: Date): string {
+    return HelperUtils.convertToBanglaDate(englishDate);
+  }
+
 }

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { PostsResponse } from '../../shared/api-models/response/post/post-response.model';
 import { postCategoryAction } from '../../store/category/category.action';
 import { postAction } from '../../store/posts/post.action';
+import { HelperUtils } from '../../shared/utils/helper.utils';
 
 @Component({
   selector: 'app-home',
@@ -32,25 +33,29 @@ export class HomeComponent {
   }
 
   // Convert the date to Bangla
+  // convertToBanglaDate(englishDate: Date): string {
+  //   const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  //   const banglaMonths = [
+  //     'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
+  //     'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
+  //   ];
+
+  //   const date = new Date(englishDate);  // 'englishDate' is a Date object now
+
+  //   const day = date.getDate();
+  //   const month = date.getMonth();
+  //   const year = date.getFullYear();
+  //   const hours = date.getHours();
+  //   const minutes = date.getMinutes();
+
+  //   const convertToBanglaDigits = (num: number): string =>
+  //     num.toString().split('').map(digit => banglaDigits[parseInt(digit)]).join('');
+
+  //   return `${convertToBanglaDigits(day)} ${banglaMonths[month]} ${convertToBanglaDigits(year)}`;
+  // }
+
   convertToBanglaDate(englishDate: Date): string {
-    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    const banglaMonths = [
-      'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
-      'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
-    ];
-
-    const date = new Date(englishDate);  // 'englishDate' is a Date object now
-
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-
-    const convertToBanglaDigits = (num: number): string =>
-      num.toString().split('').map(digit => banglaDigits[parseInt(digit)]).join('');
-
-    return `${convertToBanglaDigits(day)} ${banglaMonths[month]} ${convertToBanglaDigits(year)}`;
+    return HelperUtils.convertToBanglaDate(englishDate);
   }
 
   truncateContent(content: string | null | undefined, maxWords: number): string {
