@@ -8,6 +8,11 @@ export namespace postAction {
     static readonly type = '[Post] Get post by id';
     constructor(public id : number) { }
   }
+
+  export class GetPostByCategory {
+    static readonly type = '[Post] Get post by category';
+    constructor(public id : number) { }
+  }
   export class ClearResult
   {
       static readonly type = '[ClearResult] Clear User data';

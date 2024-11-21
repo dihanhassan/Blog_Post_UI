@@ -71,4 +71,11 @@ export class ApiService {
     );
   }
 
+  getAllPostByCategoryId(categoryId : number) : Observable<PostsResponse[] | null>{
+    return this.getData(`api/post-management/posts-by-category/${categoryId}`).pipe(
+      map(x=>x.data),
+      catchError(this.handleError)
+    );
+  }
+
 }

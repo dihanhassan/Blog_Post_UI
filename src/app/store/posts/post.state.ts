@@ -30,6 +30,11 @@ export class PostState {
     return state.post;
   }
 
+  @Selector()
+  static getPostByCategory(state : PostStateModel) : PostsResponse[] {
+    return state.posts;
+  }
+
   @Action(postAction.GetAllPosts)
   getAllCategories(ctx : StateContext<PostStateModel>,action: postAction.GetAllPosts){
     return this.apiService.getAllPosts().pipe(
@@ -39,6 +44,21 @@ export class PostState {
           ctx.setState({
             ...state,
             posts:result,
+          });
+        }
+      })
+    );
+  }
+  @Action(postAction.GetPostByCategory)
+  GetPostByCategory(ctx: StateContext<PostStateModel>, action: postAction.GetPostByCategory) {
+    console.log("Hello"+ action.id);
+    return this.apiService.getAllPostByCategoryId(action.id).pipe(
+      tap((result : PostsResponse[] | null)=>{
+        if(result){
+          const state = ctx.getState();
+          ctx.setState({
+            ...state,
+            posts: result
           });
         }
       })
@@ -62,5 +82,6 @@ export class PostState {
       });
     }
   }
+ 
 
 }

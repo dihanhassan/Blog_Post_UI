@@ -9,6 +9,7 @@ export interface CategoryStateModel {
     categories: CategoryResponse[];
     postCatories: PostCategoryResponse[];
     postCategoriesList : string[];
+    postCount : number;
 }
 
 @State<CategoryStateModel>({
@@ -16,7 +17,8 @@ export interface CategoryStateModel {
   defaults : {
     categories: [],
     postCatories: [],
-    postCategoriesList : []
+    postCategoriesList : [],
+    postCount : 0
   }
 })
 @Injectable()
@@ -34,6 +36,11 @@ export class CategoryState {
   @Selector()
   static getAllPostCategories(state : CategoryStateModel) : PostCategoryResponse[] {
     return state.postCatories;
+  }
+
+  @Selector()
+  static categoryWisePostCount(state : CategoryStateModel) : number {
+    return state.postCount;
   }
 
   @Action(postCategoryAction.GetAllCategory)
