@@ -1,15 +1,22 @@
-<section class="shadow-2xl p-5 bg-gray-600 overflow-hidden" style="height: calc(100vh - 60px); max-height: calc(100vh - 60px);">
-  <div class="p-8 bg-gray-600 h-full">
-    <div class="max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-sm h-full overflow-auto">
-      <h2 class="text-4xl font-bold text-slate-200 mb-8">{{ post.title }}</h2>
-      <p class="flex items-center mb-6 text-slate-200 text-xl">
-        <i class="fas fa-feather-alt mr-2 text-slate-200"></i> {{ post.createdBy }}
+<section class="shadow-2xl p-5 bg-gray-800 overflow-auto" style="height: calc(100vh - 60px); max-height: calc(100vh - 60px);">
+  <div class="p-8 bg-gray-800">
+    <!-- Added border class here -->
+    <div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-lg border-2 border-slate-400 overflow-hidden">
+  
+      <h2 class="text-3xl font-extrabold text-slate-200 mb-6 leading-tight tracking-tight">{{ post.title }}</h2> <!-- Tight tracking for professional look -->
+      
+      <p class="flex items-center mb-6 text-slate-200 text-md font-medium">
+        <i class="fas fa-feather-alt mr-3 text-slate-200"></i>
+        <span class="font-semibold text-sky-300"> Post by : {{ post.createdBy }}</span>
       </p>
-      <p class="text-slate-200 text-lg mb-8">
+      
+      <p class="text-slate-200 text-lg mb-8 leading-relaxed font-serif">
         {{ post.content }}
       </p>
+
       <p class="text-slate-200 text-lg mt-4">
-        <i class="far fa-calendar-alt mr-2"></i> {{ convertToBanglaDate(post.createdOn) }} 
+        <i class="far fa-calendar-alt mr-3 text-slate-200"></i>
+        {{ convertToBanglaDate(post.createdOn) }} 
       </p>
     </div>
   </div>
