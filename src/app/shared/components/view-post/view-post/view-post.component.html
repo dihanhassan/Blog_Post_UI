@@ -1,9 +1,8 @@
 <section class="shadow-2xl p-5 bg-gray-800 overflow-auto" style="height: calc(100vh - 60px); max-height: calc(100vh - 60px);">
   <div class="p-8 bg-gray-800">
-    <!-- Added border class here -->
     <div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-lg border-2 border-slate-400 overflow-hidden">
   
-      <h2 class="text-3xl font-extrabold text-slate-200 mb-6 leading-tight tracking-tight">{{ post.title }}</h2> <!-- Tight tracking for professional look -->
+      <h2 class="text-3xl font-extrabold text-slate-200 mb-6 leading-tight tracking-tight">{{ post.title }}</h2>
       
       <p class="flex items-center mb-6 text-slate-200 text-md font-medium">
         <i class="fas fa-feather-alt mr-3 text-slate-200"></i>
@@ -19,5 +18,34 @@
         {{ convertToBanglaDate(post.createdOn) }} 
       </p>
     </div>
+    
+    <!-- Tags Section Inside a Softer Light Gray Box -->
+    <div class="max-w-4xl mx-auto mt-8 bg-gray-200 p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-bold text-slate-800 mb-4">Tags</h3>
+      <div class="flex flex-wrap gap-2">
+        <span *ngFor="let tag of postCategories" class="bg-gray-600 text-slate-200 px-4 py-2 rounded-lg text-sm">
+          {{ tag }}
+        </span>
+      </div>
+    </div>
+
+ 
+    <div class="max-w-4xl mx-auto mt-8 bg-gray-200 p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-bold text-slate-800 mb-4">Author Information</h3>
+    
+      <p class="text-slate-800 font-medium">
+        <i class="fas fa-user mr-2"></i> {{ post.createdBy }}
+      </p>
+      
+      <p class="text-slate-800 font-medium">
+        <i class="fas fa-calendar-day mr-2"></i> {{ convertToBanglaDate(post.createdOn) }}
+      </p>
+    
+      <p class="text-slate-800 font-medium">
+        <i class="fas fa-edit mr-2"></i> {{ convertToBanglaDate(post.updatedOn) }}
+      </p>
+    </div>
+
+    <!-- Share Option -->
   </div>
 </section>

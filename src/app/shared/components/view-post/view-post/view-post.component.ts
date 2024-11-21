@@ -47,7 +47,7 @@ export class ViewPostComponent implements OnInit {
       this.store.dispatch(new postCategoryAction.GetAllPostCategoryByPostId(id)).subscribe(() => {
         this.categoryList$.subscribe(postCategories => {
           this.postCategories = postCategories;  
-          console.log("Hello");
+        
           console.log(this.postCategories);  
         });
       });
