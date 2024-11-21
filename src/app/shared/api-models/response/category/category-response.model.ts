@@ -4,3 +4,12 @@ export interface CategoryResponse {
   route: string;
   createdby : string;
 }
+
+export interface PostCategoryResponse {
+  id: number ;
+  categoryId: number;
+  postId: number;
+  createdOn: Date;
+  updatedOn: Date;
+  isDeleted: boolean;
+}

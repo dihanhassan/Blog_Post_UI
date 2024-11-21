@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { CategoryResponse, UserLoginRequest, UserLoginResponse } from '../api-models';
+import { CategoryResponse, PostCategoryResponse, UserLoginRequest, UserLoginResponse } from '../api-models';
 import { error } from "console";
 import { PostsResponse } from "../api-models/response/post/post-response.model";
 @Injectable({
@@ -54,6 +54,12 @@ export class ApiService {
 
   getAllCategories() : Observable<CategoryResponse[] | null>{
     return this.getData('api/category-management/category').pipe(
+      map(x=>x.data),
+      catchError(this.handleError)
+    );
+  }
+  getAllPostCategories() : Observable<PostCategoryResponse[] | null>{
+    return this.getData('api/category-management/get-post-category').pipe(
       map(x=>x.data),
       catchError(this.handleError)
     );

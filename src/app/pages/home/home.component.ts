@@ -30,6 +30,7 @@ export class HomeComponent {
     this.posts$.subscribe(posts => {
       this.blogPosts = posts; // Keep the 'createdOn' as a Date object
     });
+    this.store.dispatch(new postCategoryAction.GetAllPostCategory()).subscribe();
   }
 
   // Convert the date to Bangla
